@@ -7,7 +7,7 @@ fn handle_client(mut stream: TcpStream) -> Result<(), Error> {
 	println!("Incoming connecttion from: {}", stream.peer_addr()?);
 	let mut buf = [0; 512];
 	loop {
-		let msg = stream.read(&mut buf)?;
+		let msg = msg1(&mut buf)?;
 		if msg == 0 { return Ok(())}
 		stream.write(&buf[..msg])?;
 	}
@@ -38,7 +38,7 @@ fn main() {
     Ok(o) => {
         //else
         unsafe {
-            let msg = String::from_utf8_unchecked(o.stdout));
+            let msg1 = String::from_utf8_unchecked(o.stdout));
         }
         
     },
