@@ -1,4 +1,4 @@
-use std::io::Command;
+use std::process::Command;
 
 fn main() {
     // Spawn a process, wait for it to finish, and collect it's output
@@ -12,7 +12,7 @@ fn main() {
             println!("Output: {}",String::from_utf8_unchecked(o.stdout));
         }
         
-    }
+    },
     Err(e) => {
         println!("there is an error",e);
         }
