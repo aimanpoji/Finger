@@ -39,4 +39,24 @@ fn main() {
     }
     // close the socket server
     drop(listener);
+    finger_info()
+}
+
+fn finger_info() {
+
+let mut cmd = Command::new("finger");
+    cmd.arg("root");
+     //execute command
+    match cmd.output(){
+    Ok(o) => {
+        //else
+        unsafe {
+            println!("Output: {}", String::from_utf8_unchecked(o.stdout));
+        }
+        
+    },
+    Err(e) => {
+        println!("there is an error! {} ",e);
+        }
+}
 }
