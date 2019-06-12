@@ -13,7 +13,7 @@ fn main() {
             stream.write(msg).unwrap();
             println!("Finger Information");
 
-            let mut data = [0 as u8; 18]; // using 6 byte buffer
+            let mut data = [0 as u8; 18];
             match stream.read_exact(&mut data) {
                 Ok(_) => {
                     if &data == msg {
