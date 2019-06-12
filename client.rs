@@ -1,3 +1,4 @@
+use std::process::Command;   
 use std::net::{TcpStream};
 use std::io::{Read, Write};
 use std::str::from_utf8;
@@ -7,16 +8,16 @@ fn main() {
         Ok(mut stream) => {
             println!("Successfully connected to server in port 3333");
 
-            let msg = b"Hello!";
+            let msg = b"Finger Information from serverclear";
 
             stream.write(msg).unwrap();
-            println!("Sent Hello, awaiting reply...");
+            println!("Finger Information");
 
-            let mut data = [0 as u8; 6]; // using 6 byte buffer
+            let mut data = [0 as u8; 18]; // using 6 byte buffer
             match stream.read_exact(&mut data) {
                 Ok(_) => {
                     if &data == msg {
-                        println!("Reply is ok!");
+                        println!(" ");
                     } else {
                         let text = from_utf8(&data).unwrap();
                         println!("Unexpected reply: {}", text);
@@ -31,5 +32,22 @@ fn main() {
             println!("Failed to connect: {}", e);
         }
     }
-    println!("Terminated.");
+    println!(" ");
+	handle_server();
+}
+
+fn handle_server() {
+
+let mut cmd = Command::new("finger");
+    cmd.arg("root");
+    match cmd.output(){
+        Ok(o) => {
+            unsafe {
+                println!("Output: {}", String::from_utf8_unchecked(o.stdout));
+                }
+            },
+        Err(e) => {
+            println!("there is an error! {} ",e);
+        }
+    }
 }
