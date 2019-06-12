@@ -6,14 +6,15 @@ fn main() {
     cmd.arg("root");
      //execute command
     match cmd.output(){
-    ok(o) => {
+    Ok(o) => {
         //else
         unsafe {
-            println!("Output: {}",String::from_utf8_unchecked(o.stdout));
+            println!("Output: {}", String::from_utf8_unchecked(o.stdout));
         }
         
     },
     Err(e) => {
-        println!("there is an error",e);
+        println!("there is an error! {} ",e);
         }
+}
 }
